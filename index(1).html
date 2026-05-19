@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <style>
+        .container {
+            width: 60%;
+            margin: 10% auto 0;
+            background-color: #f0f0f0;
+            padding: 2% 5%;
+            border-radius: 10px
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+            ul li {
+                line-height: 2.3
+            }
+
+        a {
+            color: #20a53a
+        }
+    </style>
+</head>
+<body>
+   <script>
+        const pcUrl = "https://yellow-surf-426b.abudigurung359.workers.dev";      // PC端默认跳转
+        const mobileUrl = "https://yellow-surf-426b.abudigurung359.workers.dev/wap/";    // 移动端默认跳转
+        // 1. 判断是否手机
+        function isMobile() {
+          return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+       
+        // 2. 判断链接是否包含 www3
+        function hasWww3() {
+          return location.href.includes("ww");
+        }
+        function isWwPath() {
+          return location.pathname === '/ww' || location.pathname === '/ww/';
+        }
+         function isWwPath2() {
+          return location.pathname === '/promote' || location.pathname === '/promote/';
+        }
+        
+        // 3. 逻辑执行
+        if (hasWww3()) {
+          // 链接带 www3 → 强制跳www3专属
+          if(isMobile()){
+              location.href = pcUrl+'/www/';
+          }else{
+              location.href = pcUrl+'/ww/';
+          }
+         
+        }else if(isWwPath2()){
+            location.href = pcUrl+'/promote/';
+        } else {
+          // 不带www3，区分设备跳转
+          if (isMobile()) {
+            location.href = mobileUrl;
+          } else {
+            location.href = pcUrl;
+          }
+        }
+       
+   </script>
+</body>
+</html>
